@@ -144,11 +144,7 @@ class SpaceCharge3D(xt.BeamElement):
 
         if self.update_on_track:
             self.fieldmap.update_from_particles(
-                    x_p=particles.x,
-                    y_p=particles.y,
-                    z_p=particles.zeta,
-                    ncharges_p=particles.weight,
-                    q0_coulomb=particles.q0*qe)
+                particles=particles)
 
         # call C tracking kernel
         super().track(particles)
@@ -332,6 +328,8 @@ class SpaceChargeBiGaussian(xt.BeamElement):
 
 srcs = []
 srcs.append(_pkg_root.joinpath('headers/constants.h'))
+srcs.append(_pkg_root.joinpath('headers/sincos.h'))
+srcs.append(_pkg_root.joinpath('headers/power_n.h'))
 srcs.append(_pkg_root.joinpath('fieldmaps/bigaussian_src/complex_error_function.h'))
 srcs.append(_pkg_root.joinpath('fieldmaps/bigaussian_src/bigaussian.h'))
 srcs.append(_pkg_root.joinpath('longitudinal_profiles/qgaussian_src/qgaussian.h'))
